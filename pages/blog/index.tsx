@@ -30,9 +30,9 @@ const Blog = ({ posts }) => {
 Blog.defaultProps = {
   posts: [],
 }
-export function getStaticProps() {
+export function getStaticProps(ctx) {
   // toml to json
-  const cmsPosts = postsFromCMS.published.map((post) => {
+  const cmsPosts = (ctx.preview ? postsFromCMS.draft : postsFromCMS.published).map((post) => {
     const { data } = matter(post)
     return data
   })
